@@ -24,7 +24,7 @@ def run(setup, draw, target_fps=60, size=(640, 360), title="SketchPy"):
         last = now
 
         view.begin_frame()
-        draw(model, frameCount, delta_ms)  # användaren ritar till fb
+        draw(model, frameCount, delta_ms)
         view.present_framebuffer(model.fb)
         view.end_frame()
 

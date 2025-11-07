@@ -4,10 +4,12 @@ _screen = None
 _canvas = None
 
 def create_window(width: int, height: int, title: str) -> None:
-    """Create and initialize a pygame window.
+    """Create and initialize a pygame window with rendering surfaces.
     
     Initializes pygame, creates a display window with the specified dimensions,
-    and sets the window title.
+    sets the window title, and creates both screen and canvas surfaces for rendering.
+    The screen surface is the main display window, while the canvas surface is used
+    for off-screen rendering before blitting to the screen.
     
     Args:
         width (int): The width of the window in pixels.
@@ -21,7 +23,17 @@ def create_window(width: int, height: int, title: str) -> None:
     _canvas = pygame.Surface((width, height))
 
 def present_framebuffer(np_fb) -> None:
-    sarr.blit_array(_canvas, np_fb)   # kopierar in pixlarna
+    """Present a numpy framebuffer to the screen.
+    
+    Takes a numpy array representing pixel data and displays it on screen.
+    The function first copies the numpy array pixels to the canvas surface,
+    then blits the canvas to the main screen surface for display.
+    
+    Args:
+        np_fb: A numpy array containing pixel data to be displayed.
+               Should match the dimensions of the window created by create_window().
+    """
+    sarr.blit_array(_canvas, np_fb)
     _screen.blit(_canvas, (0, 0))
 
 def begin_frame() -> None:
