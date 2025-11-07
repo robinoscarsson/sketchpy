@@ -1,4 +1,7 @@
-import pygame
+import pygame, pygame.surfarray as sarr
+
+_screen = None
+_canvas = None
 
 def create_window(width: int, height: int, title: str) -> None:
     """Create and initialize a pygame window.
@@ -12,8 +15,14 @@ def create_window(width: int, height: int, title: str) -> None:
         title (str): The title to display in the window's title bar.
     """
     pygame.init()
-    pygame.display.set_mode((width, height))
+    global _screen, _canvas
+    _screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption(title)
+    _canvas = pygame.Surface((width, height))
+
+def present_framebuffer(np_fb) -> None:
+    sarr.blit_array(_canvas, np_fb)   # kopierar in pixlarna
+    _screen.blit(_canvas, (0, 0))
 
 def begin_frame() -> None:
     """Begin a new frame for rendering.
@@ -21,7 +30,7 @@ def begin_frame() -> None:
     Pumps the pygame event queue to keep the window responsive.
     This should be called at the beginning of each frame in the main loop.
     """
-    pygame.event.pump()
+    pass  # pygame.event.pump() is not strictly necessary here
 
 def end_frame() -> None:
     """End the current frame and update the display.

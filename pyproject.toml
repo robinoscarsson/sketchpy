@@ -10,7 +10,10 @@ readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Robin Oscarsson" }]
 requires-python = ">=3.9"
-dependencies = ["pygame>=2.0"]
+dependencies = [
+    "pygame>=2.0",
+    "numpy"
+]
 
 [project.urls]
 Homepage = "https://github.com/robinoscarsson/sketchpy"
