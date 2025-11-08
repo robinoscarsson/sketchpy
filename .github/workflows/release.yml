@@ -38,8 +38,6 @@ jobs:
     name: Publish to PyPI (stable)
     needs: build
     runs-on: ubuntu-latest
-    # Skarpa släpp: taggen får INTE vara a/b/rc
-    if: (!contains(github.ref, 'a')) && (!contains(github.ref, 'b')) && (!contains(github.ref, 'rc'))
     steps:
       - name: Download dist artifact
         uses: actions/download-artifact@v4
