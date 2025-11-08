@@ -3,7 +3,7 @@ import time
 from . import view, controller
 from .model import Model
 
-def run(setup, draw, target_fps=60, size=(640, 360), title="SketchPy"):
+def run(setup, draw, target_fps=60, size=(640, 360), title="kanvas"):
     view.create_window(*size, title=title)
     model = Model(size[0], size[1])
 

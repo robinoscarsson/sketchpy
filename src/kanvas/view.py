@@ -85,7 +85,7 @@ def save_canvas_to_png(filename: str = None) -> str:
     
     Args:
         filename (str, optional): The filename to save to. If None, generates
-                                a timestamped filename like "sketchpy_YYYYMMDD_HHMMSS.png".
+                                a timestamped filename like "kanvas_YYYYMMDD_HHMMSS.png".
     
     Returns:
         str: The actual filename that was used for saving.
@@ -102,11 +102,11 @@ def save_canvas_to_png(filename: str = None) -> str:
     # Generate filename if not provided
     if filename is None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"sketchpy_{timestamp}.png"
+        filename = f"kanvas_{timestamp}.png"
     
     # Create output directory relative to the project root
     # Get the directory where this module is located, then go up to project root
-    current_dir = os.path.dirname(__file__)  # src/sketchpy/
+    current_dir = os.path.dirname(__file__)  # src/kanvas/
     project_root = os.path.dirname(os.path.dirname(current_dir))  # Go up two levels to project root
     output_dir = os.path.join(project_root, "output")
     

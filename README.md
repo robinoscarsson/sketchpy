@@ -1,14 +1,17 @@
-# SketchPy 🖌️
+# kanvas 🖌️
+
+> ⚠️ **Note:** This package name (`kanvas`) is currently reserved on PyPI.  
+> The project is under active development and not yet ready for public use.
 
 **A lightweight creative-coding experiment in Python.**  
-SketchPy is a small hobby project inspired by [Processing](https://processing.org/) and [p5.js](https://p5js.org/).  
+kanvas is a small hobby project inspired by [Processing](https://processing.org/) and [p5.js](https://p5js.org/).  
 It’s not meant to replace them — it’s a hands-on homage and a way to explore how such a system might work from scratch in Python.
 
 ---
 
 ## 🎨 Overview
 
-SketchPy aims to capture the *feel* of Processing:  
+kanvas aims to capture the *feel* of Processing:  
 `setup()` runs once, `draw()` runs every frame, and the rest is up to you.
 
 Under the hood it uses [pygame](https://www.pygame.org/news) for the window and rendering, and a small core loop written to be readable, hackable, and educational.
@@ -23,12 +26,12 @@ If you’ve ever wondered *“how would I build p5 myself?”*, this is that jou
 Clone the repository and install it locally in editable mode:
 
 ```bash
-git clone https://github.com/yourname/sketchpy.git
-cd sketchpy
+git clone https://github.com/yourname/kanvas.git
+cd kanvas
 pip install -e .
 ```
 
-SketchPy requires **Python 3.9+** and **pygame** (automatically installed via pip).
+kanvas requires **Python 3.9+** and **pygame** (automatically installed via pip).
 
 ---
 
@@ -37,7 +40,7 @@ SketchPy requires **Python 3.9+** and **pygame** (automatically installed via pi
 Create a new Python file, for example `example.py`:
 
 ```python
-from sketchpy import run
+from kanvas import run
 
 def setup(model):
     model.clear(30)  # background gray
@@ -47,7 +50,7 @@ def draw(model, frame, dt):
     for y in range(model.h):
         model.pixel(x, y, 255, 255, 255)
 
-run(setup, draw, size=(320, 200), title="SketchPy Example")
+run(setup, draw, size=(320, 200), title="kanvas Example")
 ```
 
 Then run it:
@@ -64,7 +67,7 @@ Press **ESC** or click the **X** to quit.
 ## 🧩 Project Structure
 
 ```
-src/sketchpy/
+src/kanvas/
 ├── core.py         # Main loop orchestration
 ├── controller.py   # Handles input (ESC / window close)
 ├── view.py         # Pygame window and rendering
@@ -88,7 +91,7 @@ examples/
 
 ## 🧠 Philosophy
 
-SketchPy exists to **learn by building**.  
+kanvas exists to **learn by building**.  
 Every function is deliberately simple and explicit. There’s no magic, no global state, and no framework hiding the logic from you.
 
 You can trace the entire rendering path from `run()` → `controller.handle_input()` → `model.pixel()` → `view.present_framebuffer()` in less than a minute.
