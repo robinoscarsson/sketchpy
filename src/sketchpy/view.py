@@ -1,4 +1,6 @@
 import pygame, pygame.surfarray as sarr
+import os
+from datetime import datetime
 
 _screen = None
 _canvas = None
@@ -74,6 +76,50 @@ def poll_events() -> dict:
         elif event.type == pygame.KEYUP:
             event_dict["KEYUP"].append(event.key)
     return event_dict
+
+def save_canvas_to_png(filename: str = None) -> str:
+    """Save the current canvas to a PNG file.
+    
+    Saves the current state of the canvas surface to a PNG image file.
+    If no filename is provided, generates a timestamped filename automatically.
+    
+    Args:
+        filename (str, optional): The filename to save to. If None, generates
+                                a timestamped filename like "sketchpy_YYYYMMDD_HHMMSS.png".
+    
+    Returns:
+        str: The actual filename that was used for saving.
+    
+    Raises:
+        pygame.error: If there's an error saving the surface.
+        OSError: If there's an error creating directories or writing the file.
+    """
+    global _canvas
+    
+    if _canvas is None:
+        raise RuntimeError("No canvas available to save. Call create_window() first.")
+    
+    # Generate filename if not provided
+    if filename is None:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"sketchpy_{timestamp}.png"
+    
+    # Create output directory relative to the project root
+    # Get the directory where this module is located, then go up to project root
+    current_dir = os.path.dirname(__file__)  # src/sketchpy/
+    project_root = os.path.dirname(os.path.dirname(current_dir))  # Go up two levels to project root
+    output_dir = os.path.join(project_root, "output")
+    
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
+    # Full path for the file
+    filepath = os.path.join(output_dir, filename)
+    
+    # Save the canvas surface
+    pygame.image.save(_canvas, filepath)
+    
+    return filepath
 
 def shutdown() -> None:
     """Shutdown pygame and clean up resources.
