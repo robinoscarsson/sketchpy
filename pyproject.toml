@@ -8,7 +8,7 @@ version = "0.1.0b1"
 description = "A minimalist creative-coding toolkit for Python (homage to Processing/p5)."
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.9"
-authors = [{ name = "Your Name" }]
+authors = [{ name = "Robin Oscarsson" }]
 license = { text = "MIT" }
 dependencies = ["pygame>=2.0", "numpy>=1.23"]
 
