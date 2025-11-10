@@ -100,15 +100,16 @@ def save_canvas_to_png(filename: str = None) -> str:
         raise RuntimeError("No canvas available to save. Call create_window() first.")
     
     # Generate filename if not provided
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     if filename is None:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"kanvas_{timestamp}.png"
+    else:
+        filename = f"{filename}_{timestamp}.png"
+
     
-    # Create output directory relative to the project root
-    # Get the directory where this module is located, then go up to project root
-    current_dir = os.path.dirname(__file__)  # src/kanvas/
-    project_root = os.path.dirname(os.path.dirname(current_dir))  # Go up two levels to project root
-    output_dir = os.path.join(project_root, "output")
+    # Create output directory in the current working directory
+    # This works whether kanvas is installed from PyPI or used locally
+    output_dir = os.path.join(os.getcwd(), "output")
     
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)

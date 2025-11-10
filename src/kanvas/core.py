@@ -22,7 +22,7 @@ def run(setup, draw, target_fps=60, size=(640, 360), title="kanvas"):
         # Handle save request
         if input_state["save"]:
             try:
-                filepath = view.save_canvas_to_png()
+                filepath = view.save_canvas_to_png(filename=title)
                 print(f"Image saved successfully to: {filepath}")
             except Exception as e:
                 print(f"Error saving image: {e}")

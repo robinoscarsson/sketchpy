@@ -1,11 +1,167 @@
-# kanvas 🖌️
+# kanvas
 
-> ⚠️ **Note:** This package name (`kanvas`) is currently reserved on PyPI.  
-> The project is under active development and not yet ready for public use.
+[![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://python.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**A lightweight creative-coding experiment in Python.**  
-kanvas is a small hobby project inspired by [Processing](https://processing.org/) and [p5.js](https://p5js.org/).  
-It’s not meant to replace them — it’s a hands-on homage and a way to explore how such a system might work from scratch in Python.
+A minimalist creative-coding toolkit for Python, inspired by [Processing](https://processing.org/) and [p5.js](https://p5js.org/).
+
+## Overview
+
+kanvas provides a simple, educational framework for creative coding in Python. It captures the essence of Processing's `setup()` and `draw()` paradigm while maintaining a clean, readable codebase that's perfect for learning how creative coding frameworks work under the hood.
+
+**Key Features:**
+- Simple setup/draw loop similar to Processing
+- Built on pygame for reliable cross-platform support
+- Clean separation of concerns (model-view-controller architecture)
+- Lightweight and hackable (~200 lines of core code)
+- Beginner-friendly API with educational focus
+
+## Installation
+
+### Requirements
+- Python 3.9 or higher
+- pygame 2.0+
+- numpy 1.23+
+
+### Install from source
+```bash
+git clone https://github.com/robinoscarsson/kanvas.git
+cd kanvas
+pip install -e .
+```
+
+## Quick Start
+
+```python
+from kanvas.core import run
+
+def setup(model):
+    """Called once at startup"""
+    model.clear(30)  # Set background to gray
+
+def draw(model, frame, dt):
+    """Called every frame"""
+    x = (frame // 2) % model.w
+    for y in range(model.h):
+        model.pixel(x, y, 255, 255, 255)
+
+# Run the sketch
+run(setup, draw, size=(800, 600), title="My First Sketch")
+```
+
+Save this as `sketch.py` and run with:
+```bash
+python sketch.py
+```
+
+Press **ESC** to quit or close the window.
+
+## Examples
+
+Check out the `examples/` directory for more demonstrations:
+
+### Serpinski Triangle
+Fractal generation using the chaos game method.
+
+![Serpinski Triangle](examples/output/Serpinski%20Triangle%20Demo_20251110_204627.png)
+
+```python
+# Run with: python examples/serpinski_triangle.py
+```
+
+### Ulam Spiral  
+Prime number visualization in spiral form - a beautiful mathematical pattern where prime numbers create distinctive diagonal structures.
+
+![Ulam Spiral](examples/output/Ulam%20Spiral%20Demo%20(fixed)_20251110_204254.png)
+
+```python  
+# Run with: python examples/ulam_sprial.py
+```
+
+## API Reference
+
+### Core Functions
+
+#### `run(setup_func, draw_func, **kwargs)`
+Main entry point to start a kanvas sketch.
+
+**Parameters:**
+- `setup_func`: Function called once at startup, receives `model` parameter
+- `draw_func`: Function called every frame, receives `model`, `frame`, and `dt` parameters
+- `size`: Tuple of (width, height) for window size (default: (640, 360))
+- `title`: Window title string (default: "kanvas")
+- `target_fps`: Target frames per second (default: 60)
+
+### Model API
+
+The `model` object provides the drawing surface:
+
+#### `model.pixel(x, y, r, g, b)`
+Set a pixel at coordinates (x, y) to RGB color (r, g, b).
+
+#### `model.clear(gray_value)`
+Clear the entire canvas to a grayscale value (0-255).
+
+#### Properties
+- `model.w`: Canvas width in pixels
+- `model.h`: Canvas height in pixels
+
+### Controls
+
+- **ESC**: Quit the application
+- **S**: Save current frame as PNG image
+
+## Architecture
+
+kanvas follows a clean MVC architecture:
+
+```
+src/kanvas/
+├── core.py         # Main application loop and coordination
+├── controller.py   # Input handling (keyboard, mouse, window events)
+├── view.py         # Rendering and window management (pygame)
+├── model.py        # Canvas state and pixel operations
+└── utils.py        # Utility functions
+```
+
+## Philosophy
+
+kanvas is designed for **learning by doing**. The entire codebase is intentionally simple and readable, making it easy to understand how creative coding frameworks work internally. There's no magic - you can trace every function call from user input to pixel output.
+
+This makes kanvas ideal for:
+- Learning creative coding concepts
+- Understanding game loop architecture
+- Teaching graphics programming
+- Rapid prototyping of visual ideas
+- Educational workshops and tutorials
+
+## Contributing
+
+This is primarily an educational project, but contributions are welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes with clear commit messages
+4. Submit a pull request
+
+## Roadmap
+
+- [ ] Basic shape primitives (line, circle, rectangle)
+- [ ] Color management system
+- [ ] Mouse and keyboard input handling
+- [ ] Transformation matrix support
+- [ ] Image export utilities
+- [ ] Animation recording
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.
+
+## Acknowledgments
+
+- Inspired by [Processing](https://processing.org/) and [p5.js](https://p5js.org/)
+- Built with [pygame](https://pygame.org)
+- Created for educational purposes and creative exploration
 
 ---
 
