@@ -75,7 +75,7 @@ Prime number visualization in spiral form - a beautiful mathematical pattern whe
 ![Ulam Spiral](examples/output/Ulam%20Spiral%20Demo%20(fixed)_20251110_204254.png)
 
 ```python  
-# Run with: python examples/ulam_sprial.py
+# Run with: python examples/ulam_spiral.py
 ```
 
 ## API Reference
